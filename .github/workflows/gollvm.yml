@@ -14,9 +14,9 @@ jobs:
       - name: Checking the version of make, automake, autoconf and m4
         run: make --version && m4 --version && autoconf --version && automake --version
       - name: Clonning LLVM master branch && gollvm related repos.
-        run:  cd $GITHUB_WORKSPACE/clang_test_cpu_features && git clone https://github.com/llvm/llvm-project.git && cd llvm-project/llvm/tools && git clone https://go.googlesource.com/gollvm &&  cd gollvm && git clone https://go.googlesource.com/gofrontend && cd libgo && git clone https://github.com/libffi/libffi.git && git clone https://github.com/ianlancetaylor/libbacktrace.git
+        run:  cd $GITHUB_WORKSPACE/MacOS_golang && git clone https://github.com/llvm/llvm-project.git && cd llvm-project/llvm/tools && git clone https://go.googlesource.com/gollvm &&  cd gollvm && git clone https://go.googlesource.com/gofrontend && cd libgo && git clone https://github.com/libffi/libffi.git && git clone https://github.com/ianlancetaylor/libbacktrace.git
       - name: Compiling & linking gollvm
-        run: cd $GITHUB_WORKSPACE/clang_test_cpu_features && mkdir build_release && cd build_release && cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD=X86 ../llvm-project/llvm && make -j16 gollvm && ninja GoBackendCoreTests && ./tools/gollvm/unittests/BackendCore/GoBackendCoreTests
+        run: cd $GITHUB_WORKSPACE/MacOS_golang && mkdir build_release && cd build_release && cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD=X86 ../llvm-project/llvm && make -j16 gollvm && ninja GoBackendCoreTests && ./tools/gollvm/unittests/BackendCore/GoBackendCoreTests
   
   macOS_10_Catalina:
     runs-on: macos-10.15
@@ -35,4 +35,4 @@ jobs:
       - name: Building CPU feature extractor
         run: clang -I/usr/local/opt/llvm/include/llvm-c -I/usr/local/opt/llvm/include -I/usr/local/Cellar/llvm/11.0.0/ -L/usr/local/opt/llvm/lib -L/usr/local/Cellar/llvm/11.0.0/lib -lLLVM -lstdc++ llvm_cpu_features_investigation.cpp
       - name: Checking host target
-        run: llc --version
+        run: llc-11 --version
