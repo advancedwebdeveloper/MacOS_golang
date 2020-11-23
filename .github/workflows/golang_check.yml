@@ -19,6 +19,8 @@ jobs:
         run: wget https://gist.githubusercontent.com/advancedwebdeveloper/09033869445a09a2e297a73387d46c41/raw/bf7dac33e256621c445f9e61f88a832e50d901a3/llvm_cpu_features_investigation.cpp
       - name: Checking Clang's version
         run: clang --version
+      - name: Checking host target
+        run: llc --version
       - name: Building CPU feature extractor
         run: clang -I/usr/local/opt/llvm/include/llvm-c -I/usr/local/opt/llvm/include -I/usr/local/Cellar/llvm/11.0.0/ -L/usr/local/opt/llvm/lib -L/usr/local/Cellar/llvm/11.0.0/lib -lLLVM -lstdc++ llvm_cpu_features_investigation.cpp
   macOS_10_Catalina:
@@ -37,4 +39,5 @@ jobs:
         run: clang --version
       - name: Building CPU feature extractor
         run: clang -I/usr/local/opt/llvm/include/llvm-c -I/usr/local/opt/llvm/include -I/usr/local/Cellar/llvm/11.0.0/ -L/usr/local/opt/llvm/lib -L/usr/local/Cellar/llvm/11.0.0/lib -lLLVM -lstdc++ llvm_cpu_features_investigation.cpp
-  
+      - name: Checking host target
+        run: llc --version
