@@ -9,6 +9,8 @@ jobs:
     runs-on: macos-11.0
     steps:
       - uses: actions/checkout@v2
+      - name: Installing automake + autoconf + libtool
+        run: brew install autoconf automake libtool
       - name: Checking the version of make, automake, autoconf and m4
         run: make --version && m4 --version && autoconf --version && automake --version
       - name: Clonning LLVM master branch && gollvm related repos.
