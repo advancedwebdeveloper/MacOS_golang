@@ -16,7 +16,7 @@ jobs:
       - name: Clonning LLVM master branch && gollvm related repos.
         run:  cd $GITHUB_WORKSPACE && git clone https://github.com/llvm/llvm-project.git && cd llvm-project/llvm/tools && git clone https://go.googlesource.com/gollvm &&  cd gollvm && git clone https://go.googlesource.com/gofrontend && cd libgo && git clone https://github.com/libffi/libffi.git && git clone https://github.com/ianlancetaylor/libbacktrace.git
       - name: Compiling & linking gollvm
-        run: cd $GITHUB_WORKSPACE && mkdir build_release && cd build_release && cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_USE_LINKER=lld -DGOLLVM_DEFAULT_LINKER=lld ../llvm-project/llvm && make -j16 gollvm && ninja GoBackendCoreTests && ./tools/gollvm/unittests/BackendCore/GoBackendCoreTests
+        run: cd $GITHUB_WORKSPACE && mkdir build_release && cd build_release && cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_USE_LINKER=ld -DGOLLVM_DEFAULT_LINKER=ld ../llvm-project/llvm && make -j16 gollvm && ninja GoBackendCoreTests && ./tools/gollvm/unittests/BackendCore/GoBackendCoreTests
   
   macOS_10_Catalina:
     runs-on: macos-10.15
