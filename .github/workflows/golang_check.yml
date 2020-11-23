@@ -1,0 +1,23 @@
+name: Go checks
+on:
+  create:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  macOS_11_Big_Sur_search:
+    runs-on: macos-11.0
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checking if we have "go"
+        run: which go
+      - name: Checking Golang's version
+        run: go --version
+  macOS_10_Catalina_search:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checking if we have "go"
+        run: which go
+      - name: Checking Golang's version
+        run: go --version
