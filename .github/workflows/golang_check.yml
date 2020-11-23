@@ -29,3 +29,12 @@ jobs:
         run: which go
       - name: Checking Golang's version
         run: go version
+      - name: Checking where are we
+        run: pwd
+      - name: Downloading C++ code of a CPU feature extractor
+        run: wget https://gist.githubusercontent.com/advancedwebdeveloper/09033869445a09a2e297a73387d46c41/raw/bf7dac33e256621c445f9e61f88a832e50d901a3/llvm_cpu_features_investigation.cpp
+      - name: Checking Clang's version
+        run: clang --version
+      - name: Building CPU feature extractor
+        run: clang -I/usr/local/opt/llvm/include/llvm-c -I/usr/local/opt/llvm/include/llvm -I/usr/local/Cellar/llvm/11.0.0/ -L/usr/local/opt/llvm/lib -L/usr/local/Cellar/llvm/11.0.0/lib -lLLVM-11 llvm_cpu_features_investigation.cpp
+  
