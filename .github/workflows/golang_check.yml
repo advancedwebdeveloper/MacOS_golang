@@ -5,19 +5,19 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  macOS_11_Big_Sur_search:
+  macOS_11_Big_Sur:
     runs-on: macos-11.0
     steps:
       - uses: actions/checkout@v2
       - name: Checking if we have "go"
         run: which go
       - name: Checking Golang's version
-        run: go --version
-  macOS_10_Catalina_search:
+        run: go version
+  macOS_10_Catalina:
     runs-on: macos-10.15
     steps:
       - uses: actions/checkout@v2
       - name: Checking if we have "go"
         run: which go
       - name: Checking Golang's version
-        run: go --version
+        run: go version
